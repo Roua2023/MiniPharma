@@ -13,7 +13,7 @@ class ListMed extends StatelessWidget {
       body: ListView(children: [
         ListMedAppBar(),
         Container(
-          //height: 500,
+            //height: 500,
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               color: Color(0xFFB2DFDB),
@@ -58,39 +58,37 @@ class ListMed extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-
                       ElevatedButton(
-
                         style: ElevatedButton.styleFrom(
-                       backgroundColor: Colors.white,
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-
                         ),
-                     
                         onPressed: () {
                           Navigator.pushNamed(context, "/ajoutermed");
                         },
                         child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add,
-                            size: 27,
-                          ),
-                          SizedBox(width: 8),
-                          Text("Ajouter Medicament", style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),),
-                        ],
-                      ),
-                        
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add,
+                              size: 27,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              "Ajouter Medicament",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                      
-                    /*  Text(
+                      ),
+
+                      /*  Text(
                         "Tous les medicaments",
                         style: TextStyle(
                           fontSize: 25,
@@ -101,12 +99,11 @@ class ListMed extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 ItemWidget(),
               ],
             )),
       ]),
-    /*  bottomNavigationBar: CurvedNavigationBar(
+      /*  bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         color: Color(0xFF4C53A5),
         items: <Widget>[
@@ -150,7 +147,6 @@ class ListMed extends StatelessWidget {
             size: 30,
             color: Colors.white,
           ),
-
         ],
         onTap: (index) {
           switch (index) {

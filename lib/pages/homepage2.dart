@@ -1,4 +1,3 @@
-
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +5,6 @@ import 'package:minipharma/pages/%20ListMed.dart';
 import 'package:minipharma/pages/ListOrd.dart';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-
 
 class HomePage2Widget extends StatefulWidget {
   const HomePage2Widget({Key? key}) : super(key: key);
@@ -16,27 +14,19 @@ class HomePage2Widget extends StatefulWidget {
 }
 
 class _HomePage2WidgetState extends State<HomePage2Widget> {
-
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
-
     return GestureDetector(
-
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor:Colors.indigo,
+        backgroundColor: Colors.indigo,
         appBar: AppBar(
           backgroundColor: Color(0xFFCB4354),
           automaticallyImplyLeading: true,
@@ -44,11 +34,11 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
             'Pharmacity',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'Open Sans Condensed',
-              fontSize: 40,
-              letterSpacing: 3,
-              fontStyle: FontStyle.italic,
-            ),
+                fontFamily: 'Open Sans Condensed',
+                fontSize: 30,
+                letterSpacing: 3,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
           actions: [],
           centerTitle: true,
@@ -67,35 +57,29 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-
-              FlipCard(
-
-
+                FlipCard(
                   direction: FlipDirection.HORIZONTAL,
                   speed: 400,
-
-                  front:  GestureDetector(
+                  front: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ListMed()),
                       );
                     },
-                    child:Container(
-
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/medicine.png'),
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/medicine.png'),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        shape: BoxShape.rectangle,
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                      shape: BoxShape.rectangle,
                     ),
-                  ),),
+                  ),
                   back: Container(
                     width: 200,
                     height: 200,
@@ -109,7 +93,6 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                     ),
                     child: Align(
                       alignment: AlignmentDirectional(0.00, 0.00),
-
                     ),
                   ),
                 ),
@@ -117,7 +100,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                 FlipCard(
                   direction: FlipDirection.HORIZONTAL,
                   speed: 400,
-                  front:GestureDetector(
+                  front: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -125,17 +108,18 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       );
                     },
                     child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/medical-prescription.png'),
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                              'assets/images/medical-prescription.png'),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                  ),),
+                  ),
                   back: Container(
                     width: 200,
                     height: 200,
@@ -144,12 +128,12 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       borderRadius: BorderRadius.circular(12),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/images/medical-prescription.png'),
+                        image: AssetImage(
+                            'assets/images/medical-prescription.png'),
                       ),
                     ),
                     child: Align(
                       alignment: AlignmentDirectional(0.00, 0.00),
-
                     ),
                   ),
                 ),
@@ -176,7 +160,6 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
               size: 30,
               color: Colors.white,
             ),
-
           ],
           onTap: (index) {
             switch (index) {

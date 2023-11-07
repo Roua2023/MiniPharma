@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,32 +9,25 @@ class AjouterMedWidget extends StatefulWidget {
 }
 
 class _AjouterMedWidgetState extends State<AjouterMedWidget> {
-
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
-
     return GestureDetector(
-
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor:Color(0xFFB2DFDB),
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Color(0xFFCB4354),
           automaticallyImplyLeading: true,
           title: Text(
             'Ajouter Medicament',
-            style:TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -64,7 +56,8 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                   decoration: InputDecoration(
                     hintText: 'Introduire le nom',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange), // Couleur de la bordure orange
+                      borderSide: BorderSide(
+                          color: Colors.orange), // Couleur de la bordure orange
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -80,7 +73,8 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                   decoration: InputDecoration(
                     hintText: 'Introduire la quantité',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange), // Couleur de la bordure orange
+                      borderSide: BorderSide(
+                          color: Colors.orange), // Couleur de la bordure orange
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -97,7 +91,8 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                   decoration: InputDecoration(
                     hintText: 'Introduire la date de début',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange), // Couleur de la bordure orange
+                      borderSide: BorderSide(
+                          color: Colors.orange), // Couleur de la bordure orange
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -114,7 +109,8 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                   decoration: InputDecoration(
                     hintText: 'Introduire la date d\'expiration',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange), // Couleur de la bordure orange
+                      borderSide: BorderSide(
+                          color: Colors.orange), // Couleur de la bordure orange
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -128,18 +124,23 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                   ),
                 ),
                 DropdownButton<String>(
-                  items: ['Anti-inflammatoires', 'Antibiotiques', 'Cardiologie', 'Dermatologie']
-                      .map((String value) {
+                  items: [
+                    'Anti-inflammatoires',
+                    'Antibiotiques',
+                    'Cardiologie',
+                    'Dermatologie'
+                  ].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {},
-                  hint: Text('Sélectionnez une catégorie',
-                    style: TextStyle(
-                    fontSize: 14),
-                ),),
+                  hint: Text(
+                    'Sélectionnez une catégorie',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
                 SizedBox(height: 10),
 
                 // Élément "Importer Image"
@@ -150,12 +151,12 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                       onPressed: () {
                         // Logique pour le bouton d'import
                       },
-                      child:  Text(
+                      child: Text(
                         ' Importer une image',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color:Colors.black,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -166,44 +167,50 @@ class _AjouterMedWidgetState extends State<AjouterMedWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Icon(
-                      Icons.image, // Utilisez l'icône d'image
-                      color: Colors.black, // Couleur d'icône, remplacez par votre préférée
-                      size: 70,
-                    ),
+                    // Icon(
+                    //   Icons.image, // Utilisez l'icône d'image
+                    //   color: Colors
+                    //       .black, // Couleur d'icône, remplacez par votre préférée
+                    //   size: 70,
+                    // ),
                   ],
                 ),
 
-
                 // Bouton "Ajouter" centré à la base
-                Expanded(
+                // Expanded(
+                Positioned(
                   child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child:ElevatedButton(
-                      onPressed: () {
-                        // Logique pour ajouter le médicament
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(width:5), // Espacement entre l'icône et le texte
-                          Text('Ajouter', style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          )),
-                          Icon(
-                            Icons.sentiment_satisfied, // Icône smile souriant
-                            size: 24,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color(0xFFCB4354)),
-                      ),
-                    )
+                      alignment: Alignment.bottomCenter,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Logique pour ajouter le médicament
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                width:
+                                    5), // Espacement entre l'icône et le texte
 
-                  ),
+                            Icon(
+                              Icons.add, // Icône smile souriant
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                            Text('Ajouter',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ],
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xFFCB4354)),
+                        ),
+                      )),
+                  // ),
                 ),
               ],
             ),

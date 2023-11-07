@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,32 +9,25 @@ class AjouterOrdWidget extends StatefulWidget {
 }
 
 class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
-
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
-
     return GestureDetector(
-
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor:Color(0xFFB2DFDB),
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Color(0xFFCB4354),
           automaticallyImplyLeading: true,
           title: Text(
             'Ajouter Ordonnance',
-            style:TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -47,7 +39,6 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
         ),
         body: Stack(
           children: [
-
             Center(
               child: Container(
                 width: 250,
@@ -57,7 +48,6 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16.0),
-
                       ),
                       TextFormField(
                         controller: TextEditingController(),
@@ -65,7 +55,8 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                           labelText: 'Nom Medecin',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.orange, // Couleur de la bordure orange
+                              color:
+                                  Colors.orange, // Couleur de la bordure orange
                             ),
                           ),
                         ),
@@ -77,7 +68,8 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                           labelText: 'Date Prescription',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.orange, // Couleur de la bordure orange
+                              color:
+                                  Colors.orange, // Couleur de la bordure orange
                             ),
                           ),
                         ),
@@ -89,7 +81,8 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                           labelText: 'Dosage',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.orange, // Couleur de la bordure orange
+                              color:
+                                  Colors.orange, // Couleur de la bordure orange
                             ),
                           ),
                         ),
@@ -101,7 +94,8 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                           labelText: 'Etat',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.orange, // Couleur de la bordure orange
+                              color:
+                                  Colors.orange, // Couleur de la bordure orange
                             ),
                           ),
                         ),
@@ -116,24 +110,28 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                           );
                         }).toList(),
                         onChanged: (String? newValue) {},
-                        hint: Text('Sélectionnez des medicaments',
-                          style: TextStyle(
-                              fontSize: 14),
-                        ),),
+                        hint: Text(
+                          'Sélectionnez des medicaments',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
                       SizedBox(height: 25),
                       ElevatedButton.icon(
                         onPressed: () {
                           print('Button pressed ...');
                         },
-                        label: Text('Ajouter Ordonnance', style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color:Colors.white,
-                        ),),
-                        icon: Icon(Icons.sentiment_satisfied,size: 24,
-                          color: Colors.white),
+                        label: Text(
+                          'Ajouter Ordonnance',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        icon: Icon(Icons.add, size: 24, color: Colors.white),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFCB4354), // Couleur du bouton orange
+                          backgroundColor:
+                              Color(0xFFCB4354), // Couleur du bouton orange
                         ),
                       ),
                     ],
@@ -144,7 +142,6 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
           ],
         ),
       ),
-      );
-
+    );
   }
 }

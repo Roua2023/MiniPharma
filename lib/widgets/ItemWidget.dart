@@ -42,8 +42,8 @@ class ItemWidget extends StatelessWidget {
                       image: AssetImage(
                         "assets/images/maxilase.jpg",
                       ),
-                      height: 50,
-                      width: 50,
+                      height: 90,
+                      width: 90,
                     ),
                   ),
                 ),
