@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minipharma/pages/DetailsMedicament.dart';
+
 
 class ItemWidget extends StatelessWidget {
   @override
@@ -35,15 +37,23 @@ class ItemWidget extends StatelessWidget {
                   ],
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    // Navigation vers la page des médicaments
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsMedicament(),
+                      ),
+                    );
+                  },
                   child: Container(
                     margin: EdgeInsets.all(10),
                     child: Image(
                       image: AssetImage(
                         "assets/images/maxilase.jpg",
                       ),
-                      height: 90,
-                      width: 90,
+                      height: 50,
+                      width: 50,
                     ),
                   ),
                 ),

@@ -13,7 +13,7 @@ class ListMed extends StatelessWidget {
       body: ListView(children: [
         ListMedAppBar(),
         Container(
-            //height: 500,
+          //height: 500,
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               color: Color(0xFFB2DFDB),
@@ -58,13 +58,17 @@ class ListMed extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
+
                       ElevatedButton(
+
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
+
                         ),
+
                         onPressed: () {
                           Navigator.pushNamed(context, "/ajoutermed");
                         },
@@ -76,16 +80,14 @@ class ListMed extends StatelessWidget {
                               size: 27,
                             ),
                             SizedBox(width: 8),
-                            Text(
-                              "Ajouter Medicament",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
+                            Text("Ajouter Medicament", style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),),
                           ],
                         ),
+
                       ),
 
                       /*  Text(
@@ -99,6 +101,7 @@ class ListMed extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 ItemWidget(),
               ],
             )),
@@ -147,6 +150,7 @@ class ListMed extends StatelessWidget {
             size: 30,
             color: Colors.white,
           ),
+
         ],
         onTap: (index) {
           switch (index) {
