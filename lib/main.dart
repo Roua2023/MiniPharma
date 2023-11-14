@@ -1,16 +1,63 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:minipharma/pages/%20ListMed.dart';
 import 'package:minipharma/pages/AjouterMed.dart';
 import 'package:minipharma/pages/AjouterOrd.dart';
 import 'package:minipharma/pages/DetailsMedicament.dart';
+import 'package:minipharma/pages/DetailsOrds.dart';
 import 'package:minipharma/pages/ListOrd.dart';
+import 'package:minipharma/pages/TypesOrdonnances.dart';
 import 'package:minipharma/pages/homepage2.dart';
 import 'package:minipharma/pages/notifs.dart';
 import 'package:minipharma/pages/profile1.dart';
 
 import 'pages/homepage.dart';
+final FluroRouter router = FluroRouter();
+
+void defineRoutes() {
+  router.define(
+    "/",
+    handler: Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+        return const MyHomePage(title: 'Flutter Demo Home Page');
+      },
+    ),
+  );
+
+  router.define(
+    '/home2',
+    handler: Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+        return const HomePage2Widget();
+      },
+    ),
+  );
+
+  router.define(
+    '/profile',
+    handler: Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+        return const Profile1Widget();
+      },
+    ),
+  );
+
+  // ... Ajoutez les autres routes ici
+
+  router.define(
+    '/detailsord/:id',
+    handler: Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+        final int? ordonnanceId = int.tryParse(params['id']?[0] ?? '');
+        return DetailsOrdonnances(ordonnanceId: ordonnanceId);
+      },
+    ),
+  );
+}
+
 
 void main() {
+  defineRoutes();
   runApp(const MyApp());
 }
 
@@ -23,18 +70,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "/home2":(context)=>HomePage2Widget(),
-
         "/profile":(context)=>Profile1Widget(),
         "/notifs":(context)=>NotifsWidget(),
         "/ajoutermed":(context)=>AjouterMedWidget(),
         "/ajouterord":(context)=>AjouterOrdWidget(),
         "/listmed":  (context) =>  ListMed(),
-        "/listord":(context)=>ListOrd(),
+        "/listord":(context)=>ListOrd(specialite: ""),
+        "/detailsord": (context) => DetailsOrdonnances(),
         "/principale":(context)=>HomePageWidget(),
         '/medicamentdetail': (context) => DetailsMedicament(),
+        '/typesord': (context) => TypesOrdonnances(),
 
 
       },
+
       initialRoute: "/principale",
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -58,6 +107,7 @@ class MyApp extends StatelessWidget {
       ),
       //  home:HomePageWidget(),
     );
+
   }
 }
 

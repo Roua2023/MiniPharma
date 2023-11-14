@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:minipharma/models/Ordonnance.dart';
+import 'package:minipharma/pages/ListOrd.dart';
+import '../models/Medicament.dart';
+import '../Services/MedicamentService.dart';
+import '../Services/OrdonnanceService.dart';
 
 class AjouterOrdWidget extends StatefulWidget {
   const AjouterOrdWidget({Key? key}) : super(key: key);
@@ -10,10 +14,27 @@ class AjouterOrdWidget extends StatefulWidget {
 
 class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController id = TextEditingController();
+  TextEditingController nomMedecinController = TextEditingController();
+  TextEditingController datePrescriptionController = TextEditingController();
+  TextEditingController dosageController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController specialiteController = TextEditingController();
+  TextEditingController nomPatientController = TextEditingController();
+  List<Medicament> medicaments = [];
+  List<Medicament> selectedMedicaments = [];
 
   @override
   void initState() {
     super.initState();
+    MedicamentService().getAllMedicament().then((medicamentList) {
+      setState(() {
+        medicaments = medicamentList;
+      });
+    }).catchError((error) {
+      print('Error fetching medications: $error');
+      // Handle the error as needed
+    });
   }
 
   @override
@@ -50,75 +71,151 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                         padding: const EdgeInsets.all(16.0),
                       ),
                       TextFormField(
-                        controller: TextEditingController(),
+                        controller: nomMedecinController,
                         decoration: InputDecoration(
                           labelText: 'Nom Medecin',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color:
-                                  Colors.orange, // Couleur de la bordure orange
+                              color: Colors.orange,
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 25),
-                      TextFormField(
-                        controller: TextEditingController(),
-                        decoration: InputDecoration(
-                          labelText: 'Date Prescription',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color:
-                                  Colors.orange, // Couleur de la bordure orange
-                            ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2101),
+                          );
+
+                          if (pickedDate != null && pickedDate != datePrescriptionController) {
+                            setState(() {
+                              datePrescriptionController.text = pickedDate.toString();
+                            });
+                          }
+                        },
+                        child: Text(
+                          'Date Prescription',
+
+                          style: TextStyle(
+                            color: Colors.black,
+
                           ),
+
                         ),
                       ),
                       SizedBox(height: 25),
                       TextFormField(
-                        controller: TextEditingController(),
+                        controller: dosageController,
                         decoration: InputDecoration(
                           labelText: 'Dosage',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color:
-                                  Colors.orange, // Couleur de la bordure orange
+                              color: Colors.orange,
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 25),
                       TextFormField(
-                        controller: TextEditingController(),
+                        controller: phoneController,
                         decoration: InputDecoration(
-                          labelText: 'Etat',
+                          labelText: 'Téléphone Medecin',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color:
-                                  Colors.orange, // Couleur de la bordure orange
+                              color: Colors.orange,
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 25),
-                      DropdownButton<String>(
-                        items: ['DOLIPRANE', 'EFFERALGAN', 'SPASFON', 'IMODIUM']
-                            .map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {},
-                        hint: Text(
-                          'Sélectionnez des medicaments',
-                          style: TextStyle(fontSize: 14),
+                      TextFormField(
+                        controller: specialiteController,
+                        decoration: InputDecoration(
+                          labelText: 'Spécialité Medecin',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.orange,
+                            ),
+                          ),
                         ),
                       ),
+                      SizedBox(height: 25),
+                      TextFormField(
+                        controller: nomPatientController,
+                        decoration: InputDecoration(
+                          labelText: 'Nom Patient',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.orange,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 25),
+                      Column(
+                        children: medicaments.map((medicament) {
+                          return CheckboxListTile(
+                            title: Text(medicament.nomMed),
+                            value: selectedMedicaments.contains(medicament),
+                            onChanged: (bool? value) {
+                              setState(() {
+                                if (value != null) {
+                                  if (value) {
+                                    selectedMedicaments.add(medicament);
+                                  } else {
+                                    selectedMedicaments.remove(medicament);
+                                  }
+                                }
+                              });
+                            },
+                          );
+                        }).toList(),
+                      ),
+
                       SizedBox(height: 25),
                       ElevatedButton.icon(
                         onPressed: () {
                           print('Button pressed ...');
+                          print('Nom Medecin: ${nomMedecinController.text}');
+                          print('Date Prescription: ${datePrescriptionController.text}');
+                          print('Dosage: ${dosageController.text}');
+                          print('Phone: ${phoneController.text}');
+                          print('Phone: ${specialiteController.text}');
+                          print('Phone: ${nomPatientController.text}');
+                          print('Medicaments sélectionnés: $selectedMedicaments');
+
+                          Ordonnance nouvelleOrdonnance = Ordonnance(
+                            idOrd: id.hashCode,
+                            nomMedcin: nomMedecinController.text,
+                            datePrescription: parseDate(datePrescriptionController.text),
+                            medicaments: selectedMedicaments, // Assign the list directly
+                            phoneMedcin: phoneController.text,
+                            specialiteOrd: specialiteController.text,
+                            nomPatient: nomPatientController.text,
+                            photoOrdonnance: '',
+                          );
+
+                          OrdonnanceService().createOrdonnance(nouvelleOrdonnance).then((ordonnance) {
+                            print('Ordonnance ajoutée avec succès: ${ordonnance.idOrd}');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ListOrd(specialite: specialiteController.text),
+                              ),
+                            );
+                          }).catchError((error) {
+                            print('Erreur lors de l\'ajout de l\'ordonnance: $error');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ListOrd(specialite: specialiteController.text),
+                              ),
+                            );
+                          });
                         },
                         label: Text(
                           'Ajouter Ordonnance',
@@ -130,8 +227,7 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                         ),
                         icon: Icon(Icons.add, size: 24, color: Colors.white),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Color(0xFFCB4354), // Couleur du bouton orange
+                          backgroundColor: Color(0xFFCB4354),
                         ),
                       ),
                     ],
@@ -143,5 +239,14 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
         ),
       ),
     );
+  }
+
+  DateTime parseDate(String dateString) {
+    try {
+      return DateTime.parse(dateString);
+    } catch (e) {
+      print('Erreur lors de la conversion de la date: $e');
+      return DateTime.now();
+    }
   }
 }

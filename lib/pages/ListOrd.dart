@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:minipharma/widgets/ItemWidgetOrd.dart';
-
-import '../widgets/ItemWidget.dart';
-import '../widgets/ListMedAppBar.dart';
 import '../widgets/ListOrdAppBar.dart';
+import '../widgets/ItemWidgetOrd.dart';
 
 class ListOrd extends StatelessWidget {
+  final String specialite;
+
+  // Ajout d'un constructeur pour recevoir la spécialité
+  ListOrd({required this.specialite});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
-        ListOrdAppBar(),
-        Container(
-          //height: 500,
+      body: ListView(
+        children: [
+          ListOrdAppBar(),
+          Container(
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
-              color:Color(0xFFB2DFDB),
+              color: Color(0xFFB2DFDB),
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35), topRight: Radius.circular(35)),
+                topLeft: Radius.circular(35),
+                topRight: Radius.circular(35),
+              ),
             ),
             child: Column(
               children: [
@@ -55,55 +57,53 @@ class ListOrd extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 10,
+                    vertical: 10,
+                    horizontal: 30,
                   ),
-
-                  child:ElevatedButton(
-
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-
-                    ),
-
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/ajouterord");
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.add,
-                          size: 27,
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
-                        SizedBox(width: 8),
-                        Text("Ajouter Ordonnance", style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),),
-                      ],
-                    ),
-
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/ajouterord");
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add,
+                              size: 27,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              "Ajouter Ordonance",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                 /*child: Text(
-                    " All Ordonnance In My Home",
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF4C53A5)),
-                  ),*/
                 ),
-                ItemWidgetOrd(),
+                // Passer la spécialité à ItemWidgetOrd
+                ItemWidgetOrd(specialite: specialite),
               ],
-            )),
-      ]),
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color:  Color(0xFFCB4354),
+        color: Color(0xFFCB4354),
         items: <Widget>[
           Icon(
             Icons.home,
@@ -120,7 +120,6 @@ class ListOrd extends StatelessWidget {
             size: 30,
             color: Colors.white,
           ),
-
         ],
         onTap: (index) {
           switch (index) {

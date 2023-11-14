@@ -5,6 +5,7 @@ import 'package:minipharma/pages/%20ListMed.dart';
 import 'package:minipharma/pages/ListOrd.dart';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:minipharma/pages/TypesOrdonnances.dart';
 
 class HomePage2Widget extends StatefulWidget {
   const HomePage2Widget({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('assets/images/medicine.png'),
+                          image: AssetImage('assets/images/med.jpeg'),
                         ),
                         borderRadius: BorderRadius.circular(12),
                         shape: BoxShape.rectangle,
@@ -104,7 +105,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ListOrd()),
+                        MaterialPageRoute(builder: (context) => TypesOrdonnances()),
                       );
                     },
                     child: Container(
@@ -113,8 +114,8 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage(
-                              'assets/images/medical-prescription.png'),
+                          image:AssetImage('assets/images/ord.jpeg'),
+
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
