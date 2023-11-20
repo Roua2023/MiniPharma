@@ -30,11 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  path: ^1.8.3
-  image_picker: ^1.0.4
-  dio: ^4.0.4
-  multi_select_flutter: ^4.0.0
-  fluro: ^2.0.3
+  
 
 
 
@@ -48,6 +44,15 @@ dependencies:
   go_router: 7.1.1
   liquid_swipe: ^3.0.1
   smooth_page_indicator:  ^1.0.0+2
+  path: ^1.8.3
+  image_picker: ^1.0.4
+  dio: ^4.0.4
+  multi_select_flutter: ^4.0.0
+  fluro: ^2.0.3
+  path_provider: ^2.0.15
+  datetime_picker_formfield: ^2.0.0
+  permission_handler: ^11.0.1
+
 
 
 dev_dependencies:
@@ -62,6 +67,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   badges: ^3.1.2
   curved_navigation_bar: ^1.0.3
+  http: ^0.13.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -6,6 +6,8 @@ import 'package:minipharma/pages/AjouterOrd.dart';
 import 'package:minipharma/pages/DetailsMedicament.dart';
 import 'package:minipharma/pages/DetailsOrds.dart';
 import 'package:minipharma/pages/ListOrd.dart';
+import 'package:minipharma/pages/ModifierMedicament.dart';
+import 'package:minipharma/pages/ModifierOrd.dart';
 import 'package:minipharma/pages/TypesOrdonnances.dart';
 import 'package:minipharma/pages/homepage2.dart';
 import 'package:minipharma/pages/notifs.dart';
@@ -20,6 +22,15 @@ void defineRoutes() {
     handler: Handler(
       handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
         return const MyHomePage(title: 'Flutter Demo Home Page');
+      },
+    ),
+  );
+
+ router.define(
+    '/modifiermed',
+    handler: Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+        return const ModifierMedicamentWidget();
       },
     ),
   );
@@ -80,6 +91,7 @@ class MyApp extends StatelessWidget {
         "/principale":(context)=>HomePageWidget(),
         '/medicamentdetail': (context) => DetailsMedicament(),
         '/typesord': (context) => TypesOrdonnances(),
+         '/modifiermed':(context)=>ModifierMedicamentWidget()
 
 
       },

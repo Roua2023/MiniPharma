@@ -27,7 +27,7 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
   @override
   void initState() {
     super.initState();
-    MedicamentService().getAllMedicament().then((medicamentList) {
+    MedicamentService().getAllMedicaments().then((medicamentList) {
       setState(() {
         medicaments = medicamentList;
       });
@@ -176,7 +176,7 @@ class _AjouterOrdWidgetState extends State<AjouterOrdWidget> {
                         }).toList(),
                       ),
 
-                      SizedBox(height: 25),
+                    
                       ElevatedButton.icon(
                         onPressed: () {
                           print('Button pressed ...');

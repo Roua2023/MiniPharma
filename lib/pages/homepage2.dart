@@ -74,7 +74,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('assets/images/med.jpeg'),
+                          image: AssetImage('assets/images/categhome11.jpg'),
                         ),
                         borderRadius: BorderRadius.circular(12),
                         shape: BoxShape.rectangle,
@@ -88,7 +88,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       color: Colors.white,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/images/medicine.png'),
+                        image: AssetImage('assets/images/categhome11.jpg'),
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -114,7 +114,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image:AssetImage('assets/images/ord.jpeg'),
+                          image:AssetImage('assets/images/categordshome.jpg'),
 
                         ),
                         borderRadius: BorderRadius.circular(12),
