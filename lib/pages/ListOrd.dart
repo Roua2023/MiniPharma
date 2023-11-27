@@ -26,35 +26,7 @@ class ListOrd extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 5),
-                        height: 50,
-                        width: 260,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Search here",
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        Icons.camera_alt,
-                        size: 27,
-                        color: Color(0xFF4C53A5),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Container(
                   margin: EdgeInsets.symmetric(
                     vertical: 10,

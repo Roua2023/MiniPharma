@@ -52,6 +52,19 @@ dependencies:
   path_provider: ^2.0.15
   datetime_picker_formfield: ^2.0.0
   permission_handler: ^11.0.1
+  get_storage: ^2.0.0
+  get: ^4.6.1
+  flutter_local_notifications: ^16.1.0
+  timezone: ^0.9.2
+  intl:
+  google_fonts:
+  date_picker_timeline:
+  flutter_staggered_animations: ^1.1.1
+  flutter_native_timezone: ^2.0.0
+  
+ 
+ 
+
 
 
 

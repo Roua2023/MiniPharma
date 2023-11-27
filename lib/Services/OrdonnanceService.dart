@@ -1,6 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:minipharma/models/Ordonnance.dart';
+import 'package:http/http.dart' as http;
+
 
 final Dio dio = Dio();
 
@@ -9,7 +13,7 @@ class OrdonnanceService {
     connectTimeout: 5000, // 5 seconds
     receiveTimeout: 3000, // 3 seconds
   ));
-  final String baseUrl = "http://192.168.56.1:8077/ords";
+  final String baseUrl = "http://192.168.1.42:9098/ords";
 
   Future<List<Ordonnance>> getAllOrdonnances() async {
     try {
@@ -73,22 +77,73 @@ class OrdonnanceService {
       throw Exception('Failed to load ordonnance');
     }
   }
+ Future<String> uploadFile(File file) async {
+  try {
+    if (file.existsSync()) {
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('http://192.168.1.42:9098/upload'),
+      );
+
+      request.files.add(http.MultipartFile.fromBytes(
+        'file',
+        await file.readAsBytes(),
+        filename: 'image.jpg',
+      ));
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      print('here body : ${response.body}');
+
+      if (response.statusCode == 200) {
+        // Directly assign the response to imageUrl
+        String imageUrl = response.body;
+        print('Image URL: $imageUrl');
+        return imageUrl;
+      } else {
+        throw Exception('Failed to upload image. Status: ${response.statusCode}');
+      }
+    } else {
+      throw Exception('File does not exist.');
+    }
+  } catch (e) {
+    print('Error uploading file: $e');
+    throw e;
+  }
+}
 
   Future<Ordonnance> createOrdonnance(Ordonnance ord) async {
-    final response = await dio.post(
-      '$baseUrl/addord',
-      options: Options(headers: {
+    try {
+    final response = await http.post(
+      Uri.parse('$baseUrl/addord'),
+      headers: <String, String>{
         'Content-Type': 'application/json',
-      }),
-      data: jsonEncode(ord.toJson()),
+      },
+      body: jsonEncode(ord.toJson()),
     );
+      
 
     if (response.statusCode == 201) {
-      return Ordonnance.fromJson(response.data);
+      print("Il y a création du ordonnance");
+      return Ordonnance.fromJson(json.decode(response.body));
     } else {
+      print("Échec de la création du médicament");
       throw Exception('Failed to create ordonnance');
     }
+  } catch (e) {
+    print("Erreur lors de la création du ordonnance: $e");
+    throw e;
   }
+  }
+
+
+
+
+
+
+
+
+
 
   Future<void> deleteOrdonnance(int id) async {
     final response = await dio.delete('$baseUrl/delete/$id');

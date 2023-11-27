@@ -2,6 +2,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minipharma/pages/%20ListMed.dart';
+import 'package:minipharma/pages/ListDiagnostic.dart';
 import 'package:minipharma/pages/ListOrd.dart';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -57,10 +58,15 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
+            
               children: [
+                Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                 FlipCard(
                   direction: FlipDirection.HORIZONTAL,
                   speed: 400,
+                  
                   front: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -69,8 +75,9 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       );
                     },
                     child: Container(
-                      width: 200,
-                      height: 200,
+                      width: 150,
+                      height: 150,
+                   
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
@@ -82,8 +89,8 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                     ),
                   ),
                   back: Container(
-                    width: 200,
-                    height: 200,
+                    width: 150,
+                    height: 150,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       image: DecorationImage(
@@ -97,7 +104,8 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                     ),
                   ),
                 ),
-                SizedBox(height: 50), // Add spacing between the cards
+
+                SizedBox(width: 30), // Add spacing between the cards
                 FlipCard(
                   direction: FlipDirection.HORIZONTAL,
                   speed: 400,
@@ -109,8 +117,8 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                       );
                     },
                     child: Container(
-                      width: 200,
-                      height: 200,
+                      width: 150,
+                      height: 150,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
@@ -122,8 +130,8 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                     ),
                   ),
                   back: Container(
-                    width: 200,
-                    height: 200,
+                    width: 150,
+                    height: 150,
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(12),
@@ -132,6 +140,47 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                         image: AssetImage(
                             'assets/images/medical-prescription.png'),
                       ),
+                    ),
+                    child: Align(
+                      alignment: AlignmentDirectional(0.00, 0.00),
+                    ),
+                  ),
+                ),],),
+                 SizedBox(height: 50),
+                FlipCard(
+                  direction: FlipDirection.HORIZONTAL,
+                  speed: 400,
+                  front: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DiagnosticListPage()),
+                      );
+                    },
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/diagphoto.jpg'),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        shape: BoxShape.rectangle,
+                      ),
+                    ),
+                  ),
+                  back: Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/images/diagphoto.jpg'),
+                        
+                      ),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Align(
                       alignment: AlignmentDirectional(0.00, 0.00),

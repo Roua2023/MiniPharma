@@ -11,12 +11,35 @@ class ItemWidget extends StatefulWidget {
 class _ItemWidgetState extends State<ItemWidget> {
   late Future<List<Medicament>> _medicamentsFuture;
   final MedicamentService _medicamentService = MedicamentService();
+  TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _medicamentsFuture = _medicamentService.getAllMedicaments();
   }
+  void _refreshMedicaments() {
+    setState(() {
+      _medicamentsFuture = _medicamentService.getAllMedicaments();
+    });
+  }
+
+  void _searchMedicaments(String value) {
+    setState(() {
+      if (value.isEmpty) {
+        _refreshMedicaments();
+      } else {
+        _medicamentsFuture = _medicamentService.getAllMedicaments()
+            .then((medicaments) {
+          return medicaments.where((medicament) {
+            String lowercaseValue = value.toLowerCase();
+            return medicament.nomMed.toLowerCase().startsWith(lowercaseValue);
+          }).toList();
+        });
+      }
+    });
+  }
+  
 
   Future<void> _deleteMedicament(int id) async {
     try {
@@ -141,8 +164,69 @@ class _ItemWidgetState extends State<ItemWidget> {
   );
 }
 
-
-  @override
+@override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                height: 50,
+                width: 260,
+                child: TextField(
+                  controller: _searchController,
+                  onChanged: _searchMedicaments,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Search here",
+                    contentPadding: EdgeInsets.all(10),
+                  ),
+                ),
+              ),
+              Icon(
+                Icons.camera_alt,
+                size: 27,
+                color: Color(0xFF4C53A5),
+              ),
+            ],
+          ),
+        ),
+        FutureBuilder<List<Medicament>>(
+      future: _medicamentsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Erreur: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(child: Text('Aucun médicament trouvé.'));
+        } else {
+          return GridView.count(
+            childAspectRatio: 0.68,
+            physics: NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            children: [
+              for (int i = 0; i < snapshot.data!.length; i++)
+                _buildMedicamentItem(snapshot.data![i]),
+            ],
+          );
+            }
+          },
+        ),
+      ],
+    );
+  }
+  /*@override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Medicament>>(
       future: _medicamentsFuture,
@@ -167,5 +251,5 @@ class _ItemWidgetState extends State<ItemWidget> {
         }
       },
     );
-  }
+  }*/
 }
