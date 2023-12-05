@@ -4,12 +4,12 @@ import 'package:minipharma/Models/Rappel.dart';
 import 'package:http/http.dart' as http;
 
 class NotifService{
-
+final  String baseUrl="http://192.168.1.37:9098/rappels";
 
 Future<List<MedicamentRappel>> getAllRappels() async {
     try {
     
-      final response = await http.get(Uri.parse('http://192.168.1.42:9098/rappels'));
+      final response = await http.get(Uri.parse(baseUrl));
 
     
       if (response.statusCode == 200) {
@@ -32,12 +32,15 @@ Future<List<MedicamentRappel>> getAllRappels() async {
  Future<MedicamentRappel> createRappel(MedicamentRappel rap) async {
   try {
     final response = await http.post(
-      Uri.parse('http://192.168.1.42:9098/rappels/addrappel'),
+      Uri.parse('${baseUrl}/addrappel'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
       body: jsonEncode(rap.toJson()),
     );
+
+    print('Server Response Code: ${response.statusCode}');
+    print('Server Response Body: ${response.body}');
 
     if (response.statusCode == 201) {
       print("Il y a création du rappel");
@@ -53,7 +56,7 @@ Future<List<MedicamentRappel>> getAllRappels() async {
 }
 
   Future<void> deleteRappel(int id) async {
-    final response = await http.delete(Uri.parse('http://192.168.1.42:9098/rappels/$id'));
+    final response = await http.delete(Uri.parse('${baseUrl}/$id'));
 
     if (response.statusCode != 200) {
       throw Exception('Failed to delete rappel');
@@ -64,7 +67,7 @@ Future<List<MedicamentRappel>> getAllRappels() async {
   
 
   final response = await http.put(
-    Uri.parse('http://192.168.1.42:9098/rappels/$id'),
+    Uri.parse('${baseUrl}/$id'),
     headers: <String, String>{
       'Content-Type': 'application/json',
     },

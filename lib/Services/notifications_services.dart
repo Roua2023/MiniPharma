@@ -1,5 +1,4 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -38,28 +37,35 @@ class NotificationServices {
 
 
   Future<void> scheduleNotification({
-    int id = 0,
-    String? title,
-    String? body,
-    String? payload,
-    required DateTime scheduledNotificationDateTime,
-  }) async {
-    tz.initializeTimeZones();
+  int id = 0,
+  String? title,
+  String? body,
+  String? payload,
+  required DateTime scheduledNotificationDateTime,
+}) async {
+  tz.initializeTimeZones();
 
-    return flutterLocalNotificationsPlugin.zonedSchedule(
+  try {
+    final tz.TZDateTime scheduledTime = _scheduleDaily(scheduledNotificationDateTime);
+    
+    print('Scheduled Time: $scheduledTime');
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       title,
       body,
-      _scheduleDaily(scheduledNotificationDateTime),
+      scheduledTime,
       await notificationDetails(),
-   
       androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
-    ).then((value) => print('Scheduled Notification: '));
-    
+    );
+
+    print('Scheduled Notification: $id - $title - $body');
+  } catch (e) {
+    print('Error scheduling notification: $e');
   }
+}
 
   tz.TZDateTime _scheduleDaily(DateTime scheduledTime) {
     final now = tz.TZDateTime.now(tz.local);
@@ -67,9 +73,9 @@ class NotificationServices {
         scheduledTime.month, scheduledTime.day, scheduledTime.hour,
         scheduledTime.minute, scheduledTime.second);
 
-    return scheduledDateTime.isBefore(now)
-        ? scheduledDateTime.add(Duration(days: 1))
-        : scheduledDateTime;
+  return scheduledDateTime.isBefore(now)
+      ? scheduledDateTime.add(Duration(days: 1))
+      : scheduledDateTime;
   }
   
   tz.TZDateTime _convertTime(int hour, int minutes){
@@ -82,11 +88,30 @@ class NotificationServices {
    return sheduleDate;
   }
 
-  Future<void> _configureLocalTimezone() async{
-    tz.initializeTimeZones();
-    final String timezone= await FlutterNativeTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timezone));
+Future<void> _configureLocalTimezone() async {
+  tz.initializeTimeZones();
+
+  try {
+    final DateTime now = DateTime.now();
+    final Duration offset = now.timeZoneOffset;
+
+    final tz.Location localLocation = tz.Location(
+      'local',
+      <int>[offset.inMinutes, 0],  // TransitionAt
+      <int>[offset.inMinutes, 0],  // TransitionZone
+      <tz.TimeZone>[],
+    );
+
+    tz.setLocalLocation(localLocation);
+
+    print('Local timezone configured successfully.');
+  } catch (e) {
+    print('Error configuring local timezone: $e');
   }
+}
+
+
+
 
 
 

@@ -6,12 +6,14 @@ import 'package:minipharma/Models/themes.dart';
 import 'package:minipharma/Services/notifications_services.dart';
 import 'package:minipharma/pages/%20ListMed.dart';
 import 'package:minipharma/pages/AddHeure.dart';
+import 'package:minipharma/pages/AjouterBilan.dart';
 import 'package:minipharma/pages/AjouterDiagnostic.dart';
 import 'package:minipharma/pages/AjouterMed.dart';
 import 'package:minipharma/pages/AjouterOrd.dart';
 import 'package:minipharma/pages/DetailsDiagnostic.dart';
 import 'package:minipharma/pages/DetailsMedicament.dart';
 import 'package:minipharma/pages/DetailsOrds.dart';
+import 'package:minipharma/pages/ListBilan.dart';
 import 'package:minipharma/pages/ListDiagnostic.dart';
 import 'package:minipharma/pages/ListOrd.dart';
 import 'package:minipharma/pages/ModifierDiagnostic.dart';
@@ -81,6 +83,15 @@ router.define(
       },
     ),
   );
+  router.define(
+    '/detailsmed/:id',
+    handler: Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+        final int? ordonnanceId = int.tryParse(params['id']?[0] ?? '');
+        return DetailsMedicament();
+      },
+    ),
+  );
 }
 
 
@@ -118,6 +129,8 @@ class MyApp extends StatelessWidget {
         '/detailsdiagnostic': (context) => DetailsDiagnostic(),
         '/modifierdiagnostic': (context) => ModifierDiagnostic(),
          '/Addrappel': (context) => AddHeureWidget(),
+         '/listbilan':(context)=>BilanListPage(),
+          '/ajouterbilan':(context)=>AjouterBilan(),
 
 
       },

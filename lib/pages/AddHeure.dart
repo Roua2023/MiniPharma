@@ -210,58 +210,56 @@ Widget _buildSelectedDate(String labelText, TextEditingController controller) {
 
 
 Future<void> _ajouterRappel() async {
-    String nom = _nomController.text;
-    int dureeTraitementEnJours = int.tryParse(_dureeTraitementEnJoursController.text) ?? 0;
-DateTime heureRappel = parseDate(_heureRappelController.text).add(Duration(hours: 2));
+  String nom = _nomController.text;
+  int dureeTraitementEnJours = int.tryParse(_dureeTraitementEnJoursController.text) ?? 0;
+  DateTime heureRappel = parseDate(_heureRappelController.text).add(Duration(hours: 2));
 
-    try {
-      if (nom.isNotEmpty &&
-          dureeTraitementEnJours > 0 &&
-          _heureRappelController.text.isNotEmpty)  {
-       
+  try {
+    if (nom.isNotEmpty && dureeTraitementEnJours > 0 && _heureRappelController.text.isNotEmpty) {
+      MedicamentRappel newRappel = MedicamentRappel(
+        id: 0,
+        nom: nom,
+        dureeTraitementEnJours: dureeTraitementEnJours,
+        heureRappel: heureRappel..toUtc(),
+        color: 0,
+        isCompleted: 0,
+      );
 
-        MedicamentRappel newRappel = MedicamentRappel(
-          id: 0,
-          nom: nom,
-          dureeTraitementEnJours: dureeTraitementEnJours,
-          heureRappel: heureRappel..toUtc(),
-          color:0,
-          isCompleted: 0
-         
-        );
+      print(heureRappel);
 
-        print(heureRappel);
-
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Rappel ajouté avec succès!'),
           ),
         );
         Navigator.pop(context);
+      }
 
-        _nomController.clear();
-       _dureeTraitementEnJoursController.clear();
-       _heureRappelController.clear();
-await _rappelService.createRappel(newRappel);
+      _nomController.clear();
+      _dureeTraitementEnJoursController.clear();
+      _heureRappelController.clear();
+      await _rappelService.createRappel(newRappel);
 
-NotificationServices().scheduleNotification(
+      NotificationServices().scheduleNotification(
         id: newRappel.id,
         title: 'Votre médicament ${newRappel.nom}',
         body: 'Il est temps de prendre votre médicament!',
         scheduledNotificationDateTime: newRappel.heureRappel,
-        
       );
-        
-      
-      } else {
+      print(heureRappel);
+    } else {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Veuillez remplir tous les champs correctement et vérifier les dates.'),
           ),
         );
       }
-    } catch (e) {
-      print('Erreur lors de l\'ajout du rappel : $e');
+    }
+  } catch (e) {
+    print('Erreur lors de l\'ajout du rappel : $e');
+    if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Erreur lors de l\'ajout du rappel. Veuillez réessayer.'),
@@ -269,6 +267,7 @@ NotificationServices().scheduleNotification(
       );
     }
   }
+}
 
   DateTime parseDate(String dateString) {
     try {

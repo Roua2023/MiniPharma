@@ -2,6 +2,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minipharma/pages/%20ListMed.dart';
+import 'package:minipharma/pages/ListBilan.dart';
 import 'package:minipharma/pages/ListDiagnostic.dart';
 import 'package:minipharma/pages/ListOrd.dart';
 
@@ -154,7 +155,7 @@ class _HomePage2WidgetState extends State<HomePage2Widget> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => DiagnosticListPage()),
+                        MaterialPageRoute(builder: (context) => BilanListPage()),
                       );
                     },
                     child: Container(

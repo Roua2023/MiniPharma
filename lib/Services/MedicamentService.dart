@@ -6,7 +6,7 @@ import 'package:minipharma/models/Medicament.dart';
 
 
 class MedicamentService {
-   String baseUrl = "http://172.20.10.13:9098/medicaments";
+   String baseUrl = "http://192.168.180.184:9098/medicaments";
   //Dio _dio = Dio();
 Future<List<Medicament>> getAllMedicaments() async {
     try {
@@ -37,7 +37,7 @@ Future<List<Medicament>> getAllMedicaments() async {
     if (file.existsSync()) {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://172.20.10.13:9098/upload'),
+        Uri.parse('http://192.168.180.184:9098/upload'),
       );
 
       request.files.add(http.MultipartFile.fromBytes(
@@ -70,7 +70,7 @@ Future<List<Medicament>> getAllMedicaments() async {
 
   
  Future<Medicament> getMedicamentById(int id) async {
-    final response = await http.get(Uri.parse('http://172.20.10.13:9098/medicaments/$id'));
+    final response = await http.get(Uri.parse('http://192.168.180.184:9098/medicaments/$id'));
     
     if (response.statusCode == 200) {
       return Medicament.fromJson(json.decode(response.body));
@@ -82,7 +82,7 @@ Future<List<Medicament>> getAllMedicaments() async {
   Future<Medicament> createMedicament(Medicament med) async {
   try {
     final response = await http.post(
-      Uri.parse('http://172.20.10.13:9098/medicaments/addmed'),
+      Uri.parse('http://192.168.180.184:9098/medicaments/addmed'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -103,7 +103,7 @@ Future<List<Medicament>> getAllMedicaments() async {
 }
 
   Future<void> deleteMedicament(int id) async {
-    final response = await http.delete(Uri.parse('http://172.20.10.13:9098/medicaments/$id'));
+    final response = await http.delete(Uri.parse('http://192.168.180.184:9098/medicaments/$id'));
 
     if (response.statusCode != 200) {
       throw Exception('Failed to delete medicament');
@@ -114,7 +114,7 @@ Future<List<Medicament>> getAllMedicaments() async {
   
 
   final response = await http.put(
-    Uri.parse('http://172.20.10.13:9098/medicaments/$id'),
+    Uri.parse('http://192.168.180.184:9098/medicaments/$id'),
     headers: <String, String>{
       'Content-Type': 'application/json',
     },

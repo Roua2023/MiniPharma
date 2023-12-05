@@ -60,7 +60,6 @@ dependencies:
   google_fonts:
   date_picker_timeline:
   flutter_staggered_animations: ^1.1.1
-  flutter_native_timezone: ^2.0.0
   
  
  

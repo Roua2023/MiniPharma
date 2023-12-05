@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:minipharma/Services/MedicamentService.dart';
 import 'package:minipharma/models/Medicament.dart';
 
+import '../main.dart';
+
 class ItemWidget extends StatefulWidget {
   @override
   _ItemWidgetState createState() => _ItemWidgetState();
@@ -63,7 +65,12 @@ class _ItemWidgetState extends State<ItemWidget> {
     ),
     child: Column(
       children: [
-        Row(
+
+         GestureDetector(
+            onTap: () {
+              router.navigateTo(context, '/detailsord/${medicament.id}');
+            },
+            child:   Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(
@@ -72,6 +79,9 @@ class _ItemWidgetState extends State<ItemWidget> {
             ),
           ],
         ),
+
+          ),
+      
         InkWell(
           onTap: () {},
           child: Container(

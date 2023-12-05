@@ -13,7 +13,7 @@ class OrdonnanceService {
     connectTimeout: 5000, // 5 seconds
     receiveTimeout: 3000, // 3 seconds
   ));
-  final String baseUrl = "http://192.168.1.42:9098/ords";
+  final String baseUrl = "http://192.168.180.184:9098/ords";
 
   Future<List<Ordonnance>> getAllOrdonnances() async {
     try {
@@ -82,7 +82,7 @@ class OrdonnanceService {
     if (file.existsSync()) {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://192.168.1.42:9098/upload'),
+        Uri.parse('http://192.168.180.184:9098/upload'),
       );
 
       request.files.add(http.MultipartFile.fromBytes(
